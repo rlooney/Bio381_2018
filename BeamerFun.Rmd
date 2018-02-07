@@ -1,0 +1,84 @@
+---
+title: "My Favorite Albums"
+author: "Raymond Looney"
+date: "1/31/2018"
+output: beamer_presentation
+---
+
+## The Miseducation of Lauryn Hill
+\begin{picture}(320,250)
+ \put(-20,20){\includegraphics[height=8cm]{Lauryn.jpg}}
+ \put(220,200){\begin{minipage}[t]{0.35\linewidth}
+ {This album came out in 1998, and became one of the best selling solo albums of the year. Lauryn Hill produced, and wrote the entire album herself. The album is dedicated to her ex-boyfriend Wyclef Jean, who she dated while in the rap group 'The Fugees'}
+ \end{minipage}}
+ \end{picture}
+
+## What to listen to
+
+>- \color{violet} To Zion
+>- \color{violet} Ex-Factor
+>- \color{violet} Doo Wop (That Thing)
+>- \color{violet} Lost Ones
+
+## My Beautiful Dark Twisted Fantasy
+\begin{picture}(320,250)
+ \put(-20,20){\includegraphics[height=8cm]{Kanye.jpg}}
+ \put(220,200){\begin{minipage}[t]{0.35\linewidth}
+ {Kanye West's greatest album was written and produced in 2010 by himself. The album was followed by the untimely death of his mother. This album is the deepest, and darkest album of West's, but easily the most intriguing.}
+ \end{minipage}}
+ \end{picture}
+
+
+## What to listen to
+
+>- \color{red} Devil In A New Dress
+>- \color{red} Gorgeous
+>- \color{red} Lost In The World
+>- \color{red} Flashing Lights
+
+## Blond
+\begin{picture}(320,250)
+ \put(-20,20){\includegraphics[height=8cm]{Frank.jpg}}
+ \put(220,200){\begin{minipage}[t]{0.35\linewidth}
+ {Frank Ocean put out \color{orange} Channel Orange \color{black} in 2012, and took 4 years to put out his next album, which was nothing short of brilliant. Frank perfected the use of autotune, and relatability to capture the world with Blond.}
+ \end{minipage}}
+ \end{picture}
+
+## What to listen to
+
+>- \color{yellow} Nights
+>- \color{yellow} Self Control
+>- \color{yellow} White Ferrari
+>- \color{yellow} Nikes
+
+## Notion EP
+\begin{picture}(320,250)
+ \put(-20,20){\includegraphics[height=8cm]{Tash.jpg}}
+ \put(220,200){\begin{minipage}[t]{0.35\linewidth}
+ {Tash Sultana is an Australian based, self made artist. She creates all of her music in one try, and all by herself. If you listen to her music you will be baffled at what she can create in the span of 5 minutes, because it is truly breath taking. Notion EP was released in 2017.}
+ \end{minipage}}
+ \end{picture}
+
+## What to listen to
+
+>- \color{green} Jungle
+>- \color{green} Notion
+>- \color{green} Mystik
+>- \color{green} Blackbird
+
+## Honorable Mention
+- Anderson.Paak - Malibu
+- Pink Floyd - The Dark Side of The Moon
+- Kendrick Lamar - DAMN./To Pimp A Butterfly
+- The Score - The Fugees
+- Led Zeppelin - Houses of the Holy
+- Hozier - Hozier
+
+## Good bye!
+
+\begin{picture}(280,260)
+ \put(20,20){\includegraphics[height=9cm]{smiley.png}}
+ \put(95,220){\begin{minipage}[t]{0.5\linewidth}\fontsize{15pt}{7.2}\selectfont
+\color{white}{Check 'em out!}
+ \end{minipage}}
+ \end{picture}

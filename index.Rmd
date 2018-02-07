@@ -1,0 +1,33 @@
+---
+title: "Raymond's Bio 381 Webpage"
+
+author: "Raymond Looney"
+output: 
+  prettydoc::html_pretty:
+    theme: hpstr
+    highlight: github
+
+---
+## Welcome! 
+<img src="2015-04-28 19.22.18.jpg" width="200" height="200" />
+
+email: rlooney@uvm.edu
+
+## Helpful Links   
+* [Course Webpage](https://gotellilab.github.io/Bio381/)   
+* [RMarkdown Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)   
+* [Github website templates](https://github.com/jekyll/jekyll/wiki/Themes)   
+* [R help](http://stackoverflow.com/questions/tagged/r) 
+
+## Table of contents of Homework Assignments    
+* [Homework 1: ](https://rlooney.github.io/Bio381_2018/) Create a Webpage :)
+* [Homework 2: ](CauseAndEffect.html) Cause and Effect & Early Graph!
+* [Homework 3: ](BeamerFun.pdf) Beamer Presentation!
+* [Homework 4: ](Homework4.html) Basic Coding Practice
+* [Homework 5: ](#id-section5)
+* [Homework 6: ](#id-section6) 
+* [Homework 7: ](#id-section7)
+* [Homework 8: ](#id-section8)
+* [Homework 9: ](#id-section9)   
+* [Week 10: ](#id-section10)
+* [Week 11: ](#id-section11)
