@@ -24,7 +24,7 @@ email: rlooney@uvm.edu
 * [Homework 2: ](CauseAndEffect.html) Cause and Effect & Early Graph!
 * [Homework 3: ](BeamerFun.pdf) Beamer Presentation!
 * [Homework 4: ](Homework4.html) Basic Coding Practice
-* [Homework 5: ](#id-section5)
+* [Homework 5: ](Homework_5.html) Regular Expressions
 * [Homework 6: ](#id-section6) 
 * [Homework 7: ](#id-section7)
 * [Homework 8: ](#id-section8)
