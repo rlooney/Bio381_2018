@@ -25,7 +25,7 @@ email: rlooney@uvm.edu
 * [Homework 3: ](BeamerFun.pdf) Beamer Presentation!
 * [Homework 4: ](Homework4.html) Basic Coding Practice
 * [Homework 5: ](Homework_5.html) Regular Expressions
-* [Homework 6: ](#id-section6) 
+* [Homework 6: ](Homework6.html) Probability Distributions 
 * [Homework 7: ](#id-section7)
 * [Homework 8: ](#id-section8)
 * [Homework 9: ](#id-section9)   
