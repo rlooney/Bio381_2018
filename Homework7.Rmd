@@ -8,7 +8,7 @@ output: html_document
 # **Normal Distribution**
 
 ##Function to create data
-```{r}
+```{r,message=FALSE}
 dataCreate <- function(mean1=208.3, mean2=200.4, n1=200, n2=200, sd1=23, sd2=20){
   mydf <- data.frame(control=rnorm(mean = mean1, n=n1, sd=sd1),
                      test=rnorm(mean=mean2, n=n2, sd=sd2))
@@ -20,7 +20,7 @@ head(myDF)
 
 
 ##Function for ANOVA
-```{r}
+```{r,message=FALSE}
 library(reshape2)
 
 myDF2 <- melt(myDF) 
@@ -37,7 +37,7 @@ summary(myANOVA)
 
 
 ##Function to create box plot
-```{r}
+```{r,message=FALSE}
 library(ggplot2)
 library(ggplot2)
 ANOVAPlot <- function(data=myDF2){
@@ -49,7 +49,7 @@ ANOVAPlot()
 
 
 ## Running ANOVA with the same mean values
-```{r}
+```{r,message=FALSE}
 df5 <- dataCreate(mean1=375.5, mean2=375.5)
 df5<-melt(df5)
 ANOVA(data=df5)
@@ -60,7 +60,7 @@ ANOVAPlot(df5)
 
 
 ## Running ANOVA with different mean values, to get p approximately euqal to 0.05 
-```{r}
+```{r,message=FALSE}
 df6 <- dataCreate(mean2=204)
 df6<-melt(df6)
 ANOVA(data=df6)
@@ -72,7 +72,7 @@ ANOVAPlot(df6)
 
 
 ## Running ANOVA with different sampling size values, to get p approximately equal to 0.05 
-```{r}
+```{r,message=FALSE}
 df7 <- dataCreate(n2=100)
 df7<-melt(df7)
 ANOVA(data=df7)
@@ -85,7 +85,7 @@ ANOVAPlot(df7)
 
 
 ## Running ANOVA with different variance values to get p approximately equal to 0.05
-```{r}
+```{r,message=FALSE}
 df8 <- dataCreate(sd1=19.1)
 df8<-melt(df8)
 ANOVA(data=df8)
@@ -99,7 +99,7 @@ ANOVAPlot(df8)
 
 #  **Uniform Distrubution** 
 
-```{r}
+```{r,message=FALSE}
 dataCreate2 <- function(min1=100.44, min2=120.12, n1=600, n2=600, max1=304.72, max2=315.45){
   mydf <- data.frame(control=runif(min = min1, n=n1, max=max1), test=runif(min=min2, n=n2, max=max2))
   return(mydf)
@@ -110,7 +110,7 @@ head(myDFU)
 ```
 
 ##New ANOVA Function 
-```{r}
+```{r,message=FALSE}
 library(reshape2)
 myDFU2 <- melt(myDFU) 
 ANOVA <- function(data=myDFU2){
@@ -125,7 +125,7 @@ summary(myANOVA)
 ```
 
 ## Boxplot Function
-```{r}
+```{r,message=FALSE}
 library(ggplot2)
 uniformBOXPLOT <- function(data=myDFU2){
   ggplot(data=data,aes(x=variable, y=value, fill=variable)) + geom_boxplot()
