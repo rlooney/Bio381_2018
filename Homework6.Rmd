@@ -160,6 +160,5 @@ stat4 <- stat_function(aes(x = xval, y = ..y..), fun = dgamma, colour="goldenrod
  p1 + stat4
 ```
 
-
 ## How Do They Differ?
 ### I believe that the simulated data graph was very closely related to the actual data graph. The probability curves, and shape of the graphs were extremely similar. The only main difference, was R made the graph "fit" the curve better, and made the graph look more aesthetically pleasing. Overall, the simulated data was a good match for the original, however, I had a small data set, which may have created less room to create a different looking graph.

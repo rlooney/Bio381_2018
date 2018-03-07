@@ -1,0 +1,134 @@
+---
+title: "Homework 7"
+author: "Raymond Looney"
+date: "2/28/2018"
+output: html_document
+---
+
+# **Normal Distribution**
+
+##Function to create data
+```{r}
+dataCreate <- function(mean1=208.3, mean2=200.4, n1=200, n2=200, sd1=23, sd2=20){
+  mydf <- data.frame(control=rnorm(mean = mean1, n=n1, sd=sd1),
+                     test=rnorm(mean=mean2, n=n2, sd=sd2))
+  return(mydf)
+}
+myDF <-dataCreate(mean1=100.59)
+head(myDF)
+```
+
+
+##Function for ANOVA
+```{r}
+library(reshape2)
+
+myDF2 <- melt(myDF) 
+ANOVA <- function(data=myDF2){
+  myANOVA <- aov(value~variable, data=data)
+  summary(myANOVA)
+}
+ANOVA(data=myDF2)
+ANOVA()
+myANOVA <- aov(value~variable, data=myDF2)
+summary(myANOVA)
+
+```
+
+
+##Function to create box plot
+```{r}
+library(ggplot2)
+library(ggplot2)
+ANOVAPlot <- function(data=myDF2){
+  ggplot(data=data,aes(x=variable, y=value, fill=variable)) + geom_boxplot()
+}
+ANOVAPlot()
+
+```
+
+
+## Running ANOVA with the same mean values
+```{r}
+df5 <- dataCreate(mean1=375.5, mean2=375.5)
+df5<-melt(df5)
+ANOVA(data=df5)
+ANOVAPlot(df5)
+```
+
+### When mean is the same for both variables, and sampling size is the same for both variables, the p-value is always insignificant and over 0.1, but less than 1.0.
+
+
+## Running ANOVA with different mean values, to get p approximately euqal to 0.05 
+```{r}
+df6 <- dataCreate(mean2=204)
+df6<-melt(df6)
+ANOVA(data=df6)
+ANOVAPlot(df6)
+```
+
+#### With a difference in mean of approximately 4 ("effect size"), the p-value was found to be below 0.049 9/10 times, making it significant, however, it being a random data set, the p-value changes with each run, sometimes being slightly over, or slightly less than 0.05. 
+
+
+
+## Running ANOVA with different sampling size values, to get p approximately equal to 0.05 
+```{r}
+df7 <- dataCreate(n2=100)
+df7<-melt(df7)
+ANOVA(data=df7)
+ANOVAPlot(df7)
+```
+
+#### When sampling size is lowered by 100 for one variable ("effect size"), the p-value was found to be below or around 0.05, there was much variation, but the data cannot be run anywhere between n2=100-199.
+
+
+
+
+## Running ANOVA with different variance values to get p approximately equal to 0.05
+```{r}
+df8 <- dataCreate(sd1=19.1)
+df8<-melt(df8)
+ANOVA(data=df8)
+ANOVAPlot(df8)
+```
+
+#### When variance value is changed, the p-value is closest to 0.05 with a change of ~1 ("effect size") from sd1, to sd2. 
+
+
+
+
+#  **Uniform Distrubution** 
+
+```{r}
+dataCreate2 <- function(min1=100.44, min2=120.12, n1=600, n2=600, max1=304.72, max2=315.45){
+  mydf <- data.frame(control=runif(min = min1, n=n1, max=max1), test=runif(min=min2, n=n2, max=max2))
+  return(mydf)
+}
+myDFU <-dataCreate2(min1=180.44)
+head(myDFU)
+
+```
+
+##New ANOVA Function 
+```{r}
+library(reshape2)
+myDFU2 <- melt(myDFU) 
+ANOVA <- function(data=myDFU2){
+  myANOVA <- aov(value~variable, data=data)
+  summary(myANOVA)
+}
+
+ANOVA(data=myDFU2)
+ANOVA()
+myANOVA <- aov(value~variable, data=myDFU2)
+summary(myANOVA)
+```
+
+## Boxplot Function
+```{r}
+library(ggplot2)
+uniformBOXPLOT <- function(data=myDFU2){
+  ggplot(data=data,aes(x=variable, y=value, fill=variable)) + geom_boxplot()
+}
+uniformBOXPLOT()
+```
