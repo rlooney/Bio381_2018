@@ -27,7 +27,7 @@ email: rlooney@uvm.edu
 * [Homework 5: ](Homework_5.html) Regular Expressions
 * [Homework 6: ](Homework6.html) Probability Distributions 
 * [Homework 7: ](Homework7.html) Functions and Fake Data Sets
-* [Homework 8: ](#id-section8)
+* [Homework 8: ](Homework7.html)
 * [Homework 9: ](#id-section9)   
 * [Week 10: ](#id-section10)
 * [Week 11: ](#id-section11)
