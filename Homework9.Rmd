@@ -1,0 +1,80 @@
+---
+title: "Homework 9"
+author: "Raymond Looney"
+date: "3/21/2018"
+output: html_document
+---
+```{r, message=FALSE}
+# Libraries
+library(reshape2)
+library(ggplot2)
+
+# Preliminary Calls
+u <- 100
+v <- 100
+w <- 200
+x <- 200
+y <- 23
+z <- 20
+
+  # FUNCTION TO CREATE DATA
+dataCreate <- function(mean1=u, mean2=v, n1=w, n2=x, sd1=y, sd2=z){
+  mydf <- data.frame(control=rnorm(mean = mean1, n=n1, sd=sd1),
+                     test=rnorm(mean=mean2, n=n2, sd=sd2))
+  myDF2 <- melt(mydf) 
+  return(myDF2)
+}
+myDF <-dataCreate(mean1=u)
+head(myDF)
+
+# FUNCTION TO CREATE ANOVA
+myDF2 <- melt(myDF) 
+ANOVA <- function(data=myDF2){
+  myANOVA <- aov(value~variable, data=data)
+  summary(myANOVA)
+}
+ANOVA(data=myDF2)
+ANOVA()
+myANOVA <- aov(value~variable, data=myDF2)
+summary(myANOVA)
+
+# FUNCTION TO CREATE BOX PLOT
+ANOVAPlot <- function(data=myDF2){
+  ggplot(data=data,aes(x=variable, y=value, fill=variable)) + geom_boxplot()
+}
+ANOVAPlot()
+
+#########################################################
+
+# Playing around with ifelse statement in myDF to create new histogram
+
+tester <- myDF2 # random uniform
+New <- ifelse(tester > 0.3, rnorm(n=w:x, mean=u:v, sd=y:z))
+hist(New)
+
+#######################################################
+
+# Function to just extract p-value
+
+myDF2<-dataCreate()
+ANOVApVals <- function(data=myDF2){
+  ANOVApVals <- aov(value~variable, data=data)
+  summary(ANOVApVals)[[1]][["Pr(>F)"]][1]
+}
+
+ANOVApVals()
+
+#########################################################
+
+# Creating for loop
+
+pVals<-vector(mode="numeric")
+for(i in 1:10){
+  forloopdf<-dataCreate()
+  pVals[i]<-ANOVApVals(forloopdf)
+}
+
+# for loop of 10 p-values
+
+pVals
+```
