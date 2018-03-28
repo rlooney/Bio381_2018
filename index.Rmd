@@ -28,5 +28,5 @@ email: rlooney@uvm.edu
 * [Homework 6: ](Homework6.html) Probability Distributions 
 * [Homework 7 & 8: ](Homework7.html) Functions and Fake Data Sets
 * [Homework 9: ](Homework9.html) Organizing Code With Structured Programming   
-* [Week 10: ](#id-section10)
+* [Week 10: ](Homework10.html) Batch Processing
 * [Week 11: ](#id-section11)
