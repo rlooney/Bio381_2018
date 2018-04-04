@@ -1,0 +1,183 @@
+---
+title: "Homework 11"
+author: "Raymond Looney"
+date: "4/4/2018"
+output: html_document
+---
+
+# 1. 
+```{r}
+library(ggplot2)
+# N(t)= N(0)e^(r)(t)
+
+################################
+# FUNCTION: Exponential Population Growth
+# 
+# Input: N(0)= Initial population size
+#        e= Eulers Number
+#        r= Intrinsic rate of increase
+#        t= time
+# Output: N(t)= Population size at time t
+#---------------------------
+
+ExponentialCurve <- function(N0=20,
+                             r=0.5,
+                             t=1:10) {
+Nt <- N0*exp(r*t)
+return(Nt)
+}
+head(ExponentialCurve())  
+
+
+  
+########################################################
+# FUNCTION: ExponentialCurvePlot
+# plot an Exponential Curve
+# Input: N(0)= Initial population size
+#        e= Eulers Number
+#        r= Intrinsic rate of increase
+#        t= time
+# Output: graphical representation of exponential growth
+#-------------------------------------------------------
+ExponentialCurvePlot <- function(N0=20,
+                             r=0.5,
+                             t=1:10) {
+plot(x=t,y=N0*exp(r*t), 
+     type="p", #line
+     xlab="Time",
+     ylab="Nt",
+     ylim=c(0,3000))
+#mtext(paste("t =",t,"r =",r),cex = 0.7)
+return()
+}  
+ExponentialCurvePlot()  
+
+```
+
+
+#2.
+```{r}
+#preliminaries
+library(ggplot2)
+library(TeachingDemos)
+char2seed("April Foolz")
+
+########################################################
+# FUNCTION: readData
+# read in data frame
+# input: file name 
+# output: 3-column data frame of observed data (ID, xj, y)
+#-------------------------------------------------------
+mydF <- read.csv("hw11.csv")
+readData <- function(z=NULL) {
+             if(is.null(z)) {
+               xVar <- mydF$xVar
+               yVar <- mydF$yVar
+               dF <- data.frame(ID=seq_along(xVar),xVar,yVar) }
+  
+               return(dF) 
+}
+readData()              
+  
+########################################################
+# FUNCTION: getMetric
+# calculate metric for randomization test
+# input: 3-column data frame for regression
+# output: regression slope
+#-------------------------------------------------------
+getMetric <- function(z=NULL) {
+              if(is.null(z)) {
+                xVar <- mydF$xVar
+               yVar <- mydF$yVar
+                z <- data.frame(ID=seq_along(xVar),xVar,yVar) }
+  
+  . <- lm(z[,3]~z[,2])
+  . <- summary(.)
+  . <- .$coefficients[2,1]
+  slope <- .
+  return(slope)
+
+}
+getMetric()
+
+########################################################
+# FUNCTION: shuffleData
+# randomize data for regression analysis
+# input: 3-column data frame (ID,xVar,yVar)
+# output: 3-column data frame (ID,xVar,yVar)
+#-------------------------------------------------------
+shuffleData <- function(z=NULL) {
+                 if(is.null(z)) {
+                 xVar <- mydF$xVar
+                 yVar <- mydF$yVar
+                 z <- data.frame(ID=seq_along(xVar),xVar,yVar) }
+z[,3] <- sample(z[,3])
+return(z)
+}
+shuffleData()
+
+########################################################
+# FUNCTION: getPVal
+# calculate p value for observed, simulated data
+# input: -list of observed metric 
+#        -vector of simulated metric
+# output: lower, upper tail probability vector
+#-------------------------------------------------------
+getPVal <- function(z=NULL) {
+            if(is.null(z)){
+              z <- list(xObs=runif(1), xSim=runif(1000)) }
+  
+  pLower <- mean(z[[2]] <=z[[1]])
+  pUpper <- mean(z[[2]] >=z[[1]])
+  
+  return(c(pL=pLower,pU=pUpper))
+  
+}
+getPVal()
+#----------------------------------------------
+# main body of code
+nSim <- 1000 # number of simulations
+Xsim <- rep(NA,nSim) # will hold simulated slopes
+
+dF <- readData()
+Xobs <- getMetric(dF)
+
+for (i in seq_len(nSim)) {
+  Xsim[i] <- getMetric(shuffleData(dF))}
+
+slopes <- list(Xobs,Xsim)
+getPVal(slopes)
+
+
+########################################################
+# FUNCTION: plotRanTest
+# ggplot graph
+# input: list of the observed metric and vector of simulated metric
+# output: ggplot graph
+#-------------------------------------------------------
+plotRanTest <- function(z=NULL) {
+                if(is.null(z)){
+                z <- list(xObs=runif(1), xSim=runif(1000)) }
+  
+dF <- data.frame(ID=seq_along(z[[2]]),
+                 simX=z[[2]])
+p1 <- ggplot(data=dF,mapping=aes(x=simX))
+p1 + geom_histogram(mapping=aes(fill=I("darkorchid"), color=I("black"))) + geom_vline(aes(xintercept=z[[1]],col="blue"))
+}
+plotRanTest(slopes)
+plotRanTest()
+
+```
+
+# 3.
+```{r}
+ANOVARead<- aov(xVar~yVar, data=readData())
+
+ANOVAShuffle <- aov(xVar~yVar, data=shuffleData())
+
+summary(ANOVARead)
+summary(ANOVAShuffle)
+
+```
+
+### Changing the char2seed() at the very beginning changes the p-value of the shuffled data, but not the original data. The function sets a seed for the random number generator from a given character string. Thus a longer char2seed, or a shorter one, or one with different letters will always give different values. However, once this char2seed is expressed, everyone who uses it will get the same "random data".
