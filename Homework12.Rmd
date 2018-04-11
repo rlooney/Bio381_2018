@@ -1,0 +1,78 @@
+---
+title: "Homework 12"
+author: "Raymond Looney"
+date: "4/11/2018"
+output: html_document
+---
+#Base ggplot Graphics
+```{r, warning=FALSE}
+library(ggplot2)
+library(ggthemes)
+library(patchwork)
+library(TeachingDemos)
+char2seed("Lavender")
+d <- read.csv("hw12data.csv")
+head(d)
+str(d)
+
+# First Graph
+g1 <- ggplot(data=d, mapping=aes(x=FG,y=AGB)) +
+  geom_point() +
+  geom_smooth()
+print(g1)
+# Second Graph
+g2 <- ggplot(data=d,
+             mapping=aes(x=FG,fill=I("seagreen"),color=I("blue"))) +
+  geom_bar(stat="count") +
+  theme(legend.position = "none")
+print(g2)
+# Third Graph
+g3 <- ggplot(data=d,
+             mapping=aes(x=AGB,fill=I("slateblue3"),color=I("black"))) + geom_histogram()
+print(g3)
+# Fourth Graph
+g4 <- ggplot(data=d,
+             mapping=aes(x=Comp,y=BGB,fill=BGB)) + geom_boxplot() + theme(legend.position="none")
+g4
+
+
+g1 + {
+  g2 + {
+    g3 + 
+      g4 +
+      plot_layout(ncol=1)
+  }
+} +
+  plot_layout(ncol=1)
+
+```
+
+
+
+##Having Fun
+```{r, warning= FALSE}
+
+g5 <- ggplot(data=d,
+             mapping=aes(x=Comp,y=BGB,fill=BGB)) + geom_boxplot() + geom_jitter() + theme(legend.position="none")
+g5
+
+g6 <- ggplot(data=d,
+             mapping=aes(x=Comp,y=BGB,fill=BGB)) + geom_boxplot(notch= TRUE) + theme(legend.position="none")
+g6
+
+
+
+theme_set(theme_classic())
+
+g7 <- ggplot(d, aes(BGB))
+g7 <- g7 + geom_density(aes(fill=factor(Comp)), alpha=0.8) + 
+    labs(title="Composition of Below ground Biomass", 
+         subtitle="Plant Stuff",
+         x="Below ground Biomass",
+         fill="# of Compositions")
+g7
+
+
+```
+
+#Sweet!! :)

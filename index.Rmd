@@ -30,3 +30,4 @@ email: rlooney@uvm.edu
 * [Homework 9: ](Homework9.html) Organizing Code With Structured Programming   
 * [Week 10: ](Homework10.html) Batch Processing
 * [Week 11: ](Homework11.html) Randomization Test
+* [Week 12: ](Homework12.html) ggplot Graphics
