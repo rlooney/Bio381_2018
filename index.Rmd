@@ -31,3 +31,10 @@ email: rlooney@uvm.edu
 * [Week 10: ](Homework10.html) Batch Processing
 * [Week 11: ](Homework11.html) Randomization Test
 * [Week 12: ](Homework12.html) ggplot Graphics
+
+## Leaflet Package Presentation
+* [Rmd File: ](LeafletBasics.html)
+* [leafletData30: ](leafletData30.csv)
+* [leafletData500: ](leafletData500.csv)
+* [cities: ](cities.csv)
+* [R script: ]() 

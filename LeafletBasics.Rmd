@@ -1,0 +1,197 @@
+---
+title: "Leaflet Basics"
+author: "Raymond Looney"
+date: "4/24/2018"
+output: html_document
+---
+
+#Leaflet:
+
+### Leaflet is a way to create interactive maps. leaflet() creates a map widget that can store variables in order to modify the map later on
+
+
+###Installation & Preliminaries
+```{r}
+#install.packages("leaflet"); comment out in order to knit
+library(leaflet)
+library(TeachingDemos)
+library(ggplot2)
+library(maps)
+char2seed("Professor Looney")
+```
+
+###How to create a simple map of the earth & piping
+##### Piping takes the output (my_map), and adds or "pipes" addTiles() as the first argument, then reassigns it to the variable my_map
+```{r}
+# addTiles() adds mapping data from Open Street Map
+my_map <- leaflet() %>%
+  addTiles() 
+# Piping takes the output (my_map), and then adds (pipes) addTiles() as the first argument and then reassigning it to the variable my_map
+
+#Without piping notation.
+my_map=leaflet()
+my_map= addTiles(my_map)
+
+my_map
+
+```
+
+
+### Making a colorful map of the United States
+```{r}
+mapStates = map("state", fill = TRUE, plot = FALSE)
+leaflet(data = mapStates) %>% addTiles() %>%
+  addPolygons(fillColor = topo.colors(10, alpha = NULL), stroke = FALSE)
+```
+
+### Different types of maps, and how to incorportate them into your data.
+```{r}
+#Link:
+#http://leaflet-extras.github.io/leaflet-providers/preview/index.html
+
+#Satellite
+#m %>% addProviderTiles(providers$Esri.WorldImagery)
+
+#Topography Map
+#m %>% addProviderTiles(providers$OpenTopoMap)
+
+#National Geographic World Map
+#m %>% addProviderTiles(providers$Esri.NatGeoWorldMap)
+
+### Adding map to my_map
+my_map <- leaflet() %>%
+  addTiles() %>%
+  addProviderTiles(providers$Esri.WorldImagery)
+my_map
+```
+
+### Adding Markers and Pop-up Text
+#### This can be used to label certain areas that samples were collected for an in-field experiment.
+```{r}
+#Guess who!
+map <- my_map %>%
+  addMarkers(lat=44.4764, lng=-73.1955)
+map
+
+#Give her a label
+map <- my_map %>%
+  addMarkers(lat=44.4764, lng=-73.1955,
+             popup="Bio381 Classroom") # adds a pip up
+map
+
+  leaflet()%>%
+  addTiles()%>%
+  addCircleMarkers(lat=44.4764, lng=-73.1955,
+                   popup="Bio381 Classroom")
+
+```
+
+###Adding Many Markers
+####Adding 1 marker at a time isn't practical all the time. Create a random data file, or insert a .csv file with 2 variables: latitude (lat) and longitude (lng)
+```{r}
+# Let's say I wanted to collect  data randomly in Centennial Woods.
+# Create a random data frame:
+df <- data.frame(lat= runif(20, min=44.4770, max=44.4793),
+                 lng= runif(20, min=-73.18788, max=-73.18203))
+head(df) 
+df %>%
+  leaflet() %>% #passes argument to make map
+  addTiles() %>% # Adds mapping data from Open Street Map
+  addMarkers() #Adds markers
+
+                       #Importing a .csv file
+dF <- read.csv(file="leafletData30.csv") # 30 random lat & lng values
+
+markers <- data.frame(lat= dF$lat,
+                 lng= dF$lng)
+head(markers) 
+
+markers %>%
+  leaflet() %>% #passes argument to make map
+  addTiles() %>% # Adds mapping data from Open Street Map
+  addMarkers() #Adds markers
+
+```
+
+###Adding Circle Markers 
+```{r}
+markers%>%
+  leaflet()%>%
+  addTiles()%>%
+  addCircleMarkers()
+```
+
+### Adding Legends:
+#### A. rubrum= Red Maple
+#### T. canadensis= Eastern Hemlock
+#### P. strobus= White Pine
+```{r}
+# add what colors you want. If this doesnt appear you get shadows on the map.
+df <- data.frame( col = sample(c("red", "blue", "green"),
+                               20, replace = TRUE),
+                 stringsAsFactors = FALSE)
+
+dF %>%
+  leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(color = df$col) %>%
+  addLegend(labels = c("A. rubrum", "T. canadensis", "P. strobus"), colors = c("blue", "red", "green")) 
+#assign color to tree species
+```
+
+
+###Making Clusters
+```{r}
+dF2 <- read.csv(file="leafletData500.csv") #data frame with 500 coordinates in it.
+
+cluster <- data.frame(lat= dF2$lat,
+                 lng= dF2$lng)
+cluster%>%
+  leaflet()%>%
+  addTiles()%>%
+  addMarkers(clusterOptions=markerClusterOptions())
+```
+
+
+###Making Custom Markers
+```{r}
+uvmIcon <- makeIcon(iconUrl = "UVM.jpg", # call the image
+                    iconWidth = 31*215/230,
+                    iconHeight= 31,
+  iconAnchorX= 31*215/230/2,
+  iconAnchorY= 16
+) # what i found to be the best length,height,width for marker
+UVMLatLong <- data.frame(
+  lat= c(44.4779),
+  lng= c(-73.1965)) #lat & lng for your data point 
+UVMLatLong %>%
+  leaflet()%>%
+  addTiles()%>%
+  addMarkers(icon= uvmIcon) # what icon do u want
+
+```
+
+### Adding Shapes
+```{r}
+
+#RECTANGLES
+  leaflet() %>%
+  addTiles() %>%
+  addRectangles(lat1 = 44.479042, lng1 = -73.188312, 
+                lat2 = 44.478368, lng2 = -73.186553)
+
+#CIRCLES
+cities <- read.csv("cities.csv")
+print(cities) # data set with cities, lng, lat, and population.
+
+leaflet(cities) %>% addTiles() %>%
+  addCircles(lng = ~long, lat = ~lat, weight = 1,
+             radius = ~sqrt(pop) * 30, popup = ~city)
+# radius of circle is sqrt of population size, making it span all areas around the midpoint.
+```
+
+
+
+
+
+
