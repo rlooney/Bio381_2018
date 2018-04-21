@@ -17,9 +17,9 @@ output: html_document
 library(leaflet)
 library(ggplot2)
 library(maps)
-read.csv("leafletData30.csv")
-read.csv("leafletData500.csv")
-read.csv("cities.csv")
+dF <- read.csv("leafletData30.csv")
+dF2<- read.csv("leafletData500.csv")
+cities<- read.csv("cities.csv")
 library(TeachingDemos)
 char2seed("Professor Looney")
 ```
@@ -28,6 +28,7 @@ char2seed("Professor Looney")
 
 ```{r}
 # addTiles() adds mapping data from Open Street Map
+# %>% takes the output my_map,and adds or "pipes" to the next command addTiles() as the first argument, and reassigns it to that variable
 my_map <- leaflet() %>%
   addTiles() 
 
@@ -39,13 +40,6 @@ my_map
 
 ```
 
-
-### Making a colorful map of the United States
-```{r}
-mapStates = map("state", fill = TRUE, plot = FALSE)
-leaflet(data = mapStates) %>% addTiles() %>%
-  addPolygons(fillColor = topo.colors(10, alpha = NULL), stroke = FALSE)
-```
 
 ### Different types of maps, and how to incorportate them into your data.
 ```{r}
@@ -134,7 +128,7 @@ df <- data.frame( col = sample(c("red", "blue", "green"),
                                20, replace = TRUE),
                  stringsAsFactors = FALSE)
 
-dF %>%
+markers %>%
   leaflet() %>%
   addTiles() %>%
   addCircleMarkers(color = df$col) %>%
@@ -179,6 +173,12 @@ UVMLatLong %>%
 ```{r}
 # you can add rectangles or polygons with addRectangles() or addPolygons()
 
+#POLYGONS
+# simple colored map of the united states
+mapStates = map("state", fill = TRUE, plot = FALSE)
+leaflet(data = mapStates) %>% addTiles() %>%
+  addPolygons(fillColor = topo.colors(10, alpha = NULL), stroke = FALSE)
+
 #CIRCLES
 cities <- read.csv("cities.csv")
 print(cities) # data set with cities, lng, lat, and population.
@@ -188,8 +188,6 @@ leaflet(cities) %>% addTiles() %>%
              radius = ~sqrt(pop) * 30, popup = ~city)
 # radius of circle is sqrt of population size, making it span all areas around the midpoint.
 ```
-
-
 
 
 
