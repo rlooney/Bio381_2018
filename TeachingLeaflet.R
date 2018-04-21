@@ -153,6 +153,13 @@ leaflet()%>%
 
 
                          #CIRCLES
+dF %>%
+  leaflet()%>%
+    addTiles()%>%
+    addCircles(lng = dF$lng,lat = dF$lat, 
+               radius = 30,
+               popup = "?")
+
 cities <- read.csv("cities.csv")
 print(cities)
 

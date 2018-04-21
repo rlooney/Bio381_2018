@@ -5,28 +5,31 @@ date: "4/24/2018"
 output: html_document
 ---
 
+
 #Leaflet:
 
 ### Leaflet is a way to create interactive maps. leaflet() creates a map widget that can store variables in order to modify the map later on
 
 
 ###Installation & Preliminaries
-```{r}
+```{r,results="hide"}
 #install.packages("leaflet"); comment out in order to knit
 library(leaflet)
-library(TeachingDemos)
 library(ggplot2)
 library(maps)
+read.csv("leafletData30.csv")
+read.csv("leafletData500.csv")
+read.csv("cities.csv")
+library(TeachingDemos)
 char2seed("Professor Looney")
 ```
 
 ###How to create a simple map of the earth & piping
-##### Piping takes the output (my_map), and adds or "pipes" addTiles() as the first argument, then reassigns it to the variable my_map
+
 ```{r}
 # addTiles() adds mapping data from Open Street Map
 my_map <- leaflet() %>%
   addTiles() 
-# Piping takes the output (my_map), and then adds (pipes) addTiles() as the first argument and then reassigning it to the variable my_map
 
 #Without piping notation.
 my_map=leaflet()
@@ -50,13 +53,13 @@ leaflet(data = mapStates) %>% addTiles() %>%
 #http://leaflet-extras.github.io/leaflet-providers/preview/index.html
 
 #Satellite
-#m %>% addProviderTiles(providers$Esri.WorldImagery)
+#my_map %>% addProviderTiles(providers$Esri.WorldImagery)
 
 #Topography Map
-#m %>% addProviderTiles(providers$OpenTopoMap)
+#my_map %>% addProviderTiles(providers$OpenTopoMap)
 
 #National Geographic World Map
-#m %>% addProviderTiles(providers$Esri.NatGeoWorldMap)
+#my_map %>% addProviderTiles(providers$Esri.NatGeoWorldMap)
 
 ### Adding map to my_map
 my_map <- leaflet() %>%
@@ -90,7 +93,7 @@ map
 ####Adding 1 marker at a time isn't practical all the time. Create a random data file, or insert a .csv file with 2 variables: latitude (lat) and longitude (lng)
 ```{r}
 # Let's say I wanted to collect  data randomly in Centennial Woods.
-# Create a random data frame:
+                            # Create a random data frame:
 df <- data.frame(lat= runif(20, min=44.4770, max=44.4793),
                  lng= runif(20, min=-73.18788, max=-73.18203))
 head(df) 
@@ -99,7 +102,7 @@ df %>%
   addTiles() %>% # Adds mapping data from Open Street Map
   addMarkers() #Adds markers
 
-                       #Importing a .csv file
+                             #Importing a .csv file
 dF <- read.csv(file="leafletData30.csv") # 30 random lat & lng values
 
 markers <- data.frame(lat= dF$lat,
@@ -155,6 +158,7 @@ cluster%>%
 
 ###Making Custom Markers
 ```{r}
+# copy and paste!!!
 uvmIcon <- makeIcon(iconUrl = "UVM.jpg", # call the image
                     iconWidth = 31*215/230,
                     iconHeight= 31,
@@ -173,12 +177,7 @@ UVMLatLong %>%
 
 ### Adding Shapes
 ```{r}
-
-#RECTANGLES
-  leaflet() %>%
-  addTiles() %>%
-  addRectangles(lat1 = 44.479042, lng1 = -73.188312, 
-                lat2 = 44.478368, lng2 = -73.186553)
+# you can add rectangles or polygons with addRectangles() or addPolygons()
 
 #CIRCLES
 cities <- read.csv("cities.csv")

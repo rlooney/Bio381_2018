@@ -150,19 +150,19 @@ $(document).ready(function () {
 <h3>Installation &amp; Preliminaries</h3>
 <pre class="r"><code>#install.packages(&quot;leaflet&quot;); comment out in order to knit
 library(leaflet)
-library(TeachingDemos)
 library(ggplot2)
 library(maps)
+read.csv(&quot;leafletData30.csv&quot;)
+read.csv(&quot;leafletData500.csv&quot;)
+read.csv(&quot;cities.csv&quot;)
+library(TeachingDemos)
 char2seed(&quot;Professor Looney&quot;)</code></pre>
 </div>
 <div id="how-to-create-a-simple-map-of-the-earth-piping" class="section level3">
 <h3>How to create a simple map of the earth &amp; piping</h3>
-<div id="piping-takes-the-output-my_map-and-adds-or-pipes-addtiles-as-the-first-argument-then-reassigns-it-to-the-variable-my_map" class="section level5">
-<h5>Piping takes the output (my_map), and adds or “pipes” addTiles() as the first argument, then reassigns it to the variable my_map</h5>
 <pre class="r"><code># addTiles() adds mapping data from Open Street Map
 my_map &lt;- leaflet() %&gt;%
   addTiles() 
-# Piping takes the output (my_map), and then adds (pipes) addTiles() as the first argument and then reassigning it to the variable my_map
 
 #Without piping notation.
 my_map=leaflet()
@@ -171,7 +171,6 @@ my_map= addTiles(my_map)
 my_map</code></pre>
 <div id="htmlwidget-7e49deb866717fe02126" style="width:672px;height:480px;" class="leaflet html-widget"></div>
 <script type="application/json" data-for="htmlwidget-7e49deb866717fe02126">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]}]},"evals":[],"jsHooks":[]}</script>
-</div>
 </div>
 <div id="making-a-colorful-map-of-the-united-states" class="section level3">
 <h3>Making a colorful map of the United States</h3>
@@ -187,13 +186,13 @@ leaflet(data = mapStates) %&gt;% addTiles() %&gt;%
 #http://leaflet-extras.github.io/leaflet-providers/preview/index.html
 
 #Satellite
-#m %&gt;% addProviderTiles(providers$Esri.WorldImagery)
+#my_map %&gt;% addProviderTiles(providers$Esri.WorldImagery)
 
 #Topography Map
-#m %&gt;% addProviderTiles(providers$OpenTopoMap)
+#my_map %&gt;% addProviderTiles(providers$OpenTopoMap)
 
 #National Geographic World Map
-#m %&gt;% addProviderTiles(providers$Esri.NatGeoWorldMap)
+#my_map %&gt;% addProviderTiles(providers$Esri.NatGeoWorldMap)
 
 ### Adding map to my_map
 my_map &lt;- leaflet() %&gt;%
@@ -233,7 +232,7 @@ map</code></pre>
 <div id="adding-1-marker-at-a-time-isnt-practical-all-the-time.-create-a-random-data-file-or-insert-a-.csv-file-with-2-variables-latitude-lat-and-longitude-lng" class="section level4">
 <h4>Adding 1 marker at a time isn’t practical all the time. Create a random data file, or insert a .csv file with 2 variables: latitude (lat) and longitude (lng)</h4>
 <pre class="r"><code># Let's say I wanted to collect  data randomly in Centennial Woods.
-# Create a random data frame:
+                            # Create a random data frame:
 df &lt;- data.frame(lat= runif(20, min=44.4770, max=44.4793),
                  lng= runif(20, min=-73.18788, max=-73.18203))
 head(df) </code></pre>
@@ -250,7 +249,7 @@ head(df) </code></pre>
   addMarkers() #Adds markers</code></pre>
 <div id="htmlwidget-e3fd1a7e579557c309ba" style="width:672px;height:480px;" class="leaflet html-widget"></div>
 <script type="application/json" data-for="htmlwidget-e3fd1a7e579557c309ba">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[44.4781331072293,44.4776593463729,44.4789966903715,44.4786533266663,44.4779182796841,44.4780188752219,44.4781410295515,44.4790158453832,44.4772993012019,44.4773493135849,44.4785472548752,44.4789477580398,44.4788092204996,44.4778393338996,44.4782860003263,44.4781734508768,44.4789646872579,44.4782986998449,44.4774869311765,44.4773748615272],[-73.1841332819868,-73.1857381551515,-73.1832355052903,-73.1854843044628,-73.1854946484012,-73.1876553784493,-73.1820712867963,-73.1820740172838,-73.1824582705473,-73.1856855426023,-73.1824564094159,-73.1845180462132,-73.1839399700053,-73.1868517856176,-73.1869904774167,-73.1874131210942,-73.1834497008221,-73.1850861548278,-73.1851167295061,-73.1848826635945],null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,null,null]}],"limits":{"lat":[44.4772993012019,44.4790158453832],"lng":[-73.1876553784493,-73.1820712867963]}},"evals":[],"jsHooks":[]}</script>
-<pre class="r"><code>                       #Importing a .csv file
+<pre class="r"><code>                             #Importing a .csv file
 dF &lt;- read.csv(file=&quot;leafletData30.csv&quot;) # 30 random lat &amp; lng values
 
 markers &lt;- data.frame(lat= dF$lat,
@@ -321,7 +320,8 @@ cluster%&gt;%
 </div>
 <div id="making-custom-markers" class="section level3">
 <h3>Making Custom Markers</h3>
-<pre class="r"><code>uvmIcon &lt;- makeIcon(iconUrl = &quot;UVM.jpg&quot;, # call the image
+<pre class="r"><code># copy and paste!!!
+uvmIcon &lt;- makeIcon(iconUrl = &quot;UVM.jpg&quot;, # call the image
                     iconWidth = 31*215/230,
                     iconHeight= 31,
   iconAnchorX= 31*215/230/2,
@@ -335,18 +335,13 @@ UVMLatLong %&gt;%
   addTiles()%&gt;%
   addMarkers(icon= uvmIcon) # what icon do u want</code></pre>
 <div id="htmlwidget-fb165831a4d992cff161" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-fb165831a4d992cff161">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[44.4779,-73.1965,{"iconUrl":{"data":"data:image/jpeg;base64,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","index":0},"iconWidth":28.9782608695652,"iconHeight":31,"iconAnchorX":14.4891304347826,"iconAnchorY":16},null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,null,null]}],"limits":{"lat":[44.4779,44.4779],"lng":[-73.1965,-73.1965]}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-fb165831a4d992cff161">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[44.4779,-73.1965,{"iconUrl":{"data":"UVM.jpg","index":0},"iconWidth":28.9782608695652,"iconHeight":31,"iconAnchorX":14.4891304347826,"iconAnchorY":16},null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,null,null]}],"limits":{"lat":[44.4779,44.4779],"lng":[-73.1965,-73.1965]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="adding-shapes" class="section level3">
 <h3>Adding Shapes</h3>
-<pre class="r"><code>#RECTANGLES
-  leaflet() %&gt;%
-  addTiles() %&gt;%
-  addRectangles(lat1 = 44.479042, lng1 = -73.188312, 
-                lat2 = 44.478368, lng2 = -73.186553)</code></pre>
-<div id="htmlwidget-dafa9898107d0033e967" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-dafa9898107d0033e967">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addRectangles","args":[44.479042,-73.188312,44.478368,-73.186553,null,null,{"lineCap":null,"lineJoin":null,"clickable":true,"pointerEvents":null,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.2,"dashArray":null,"smoothFactor":1,"noClip":false},null,null,null,null,null]}],"limits":{"lat":[44.478368,44.479042],"lng":[-73.188312,-73.186553]}},"evals":[],"jsHooks":[]}</script>
-<pre class="r"><code>#CIRCLES
+<pre class="r"><code># you can add rectangles or polygons with addRectangles() or addPolygons()
+
+#CIRCLES
 cities &lt;- read.csv(&quot;cities.csv&quot;)
 print(cities) # data set with cities, lng, lat, and population.</code></pre>
 <pre><code>##           city     lat     long     pop
@@ -360,8 +355,8 @@ print(cities) # data set with cities, lng, lat, and population.</code></pre>
 <pre class="r"><code>leaflet(cities) %&gt;% addTiles() %&gt;%
   addCircles(lng = ~long, lat = ~lat, weight = 1,
              radius = ~sqrt(pop) * 30, popup = ~city)</code></pre>
-<div id="htmlwidget-3f1f013e2cfb0c4001f3" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-3f1f013e2cfb0c4001f3">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircles","args":[[42.3601,41.7627,40.7127,39.95,40.4397,41.8236,44.4759],[-71.0589,-72.6743,-74.0059,-75.1667,-79.9764,-71.4222,-73.2121],[24111.6030159755,10607.3229421942,86979.3078841169,37385.8261912185,16590.8679700611,12656.8005435813,6167.17115053571],null,null,{"lineCap":null,"lineJoin":null,"clickable":true,"pointerEvents":null,"className":"","stroke":true,"color":"#03F","weight":1,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.2,"dashArray":null},["Boston","Hartford","NYC","Philadelphia","Pittsburgh","Providence","Burlington"],null,null,null,null,null]}],"limits":{"lat":[39.95,44.4759],"lng":[-79.9764,-71.0589]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-dafa9898107d0033e967" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-dafa9898107d0033e967">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircles","args":[[42.3601,41.7627,40.7127,39.95,40.4397,41.8236,44.4759],[-71.0589,-72.6743,-74.0059,-75.1667,-79.9764,-71.4222,-73.2121],[24111.6030159755,10607.3229421942,86979.3078841169,37385.8261912185,16590.8679700611,12656.8005435813,6167.17115053571],null,null,{"lineCap":null,"lineJoin":null,"clickable":true,"pointerEvents":null,"className":"","stroke":true,"color":"#03F","weight":1,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.2,"dashArray":null},["Boston","Hartford","NYC","Philadelphia","Pittsburgh","Providence","Burlington"],null,null,null,null,null]}],"limits":{"lat":[39.95,44.4759],"lng":[-79.9764,-71.0589]}},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code># radius of circle is sqrt of population size, making it span all areas around the midpoint.</code></pre>
 </div>
 </div>
