@@ -97,8 +97,7 @@ df %>%
   addMarkers() #Adds markers
 
                              #Importing a .csv file
-dF <- read.csv(file="leafletData30.csv") # 30 random lat & lng values
-
+# dF is a data frame with 30 coordinates in it
 markers <- data.frame(lat= dF$lat,
                  lng= dF$lng)
 head(markers) 
@@ -139,8 +138,7 @@ markers %>%
 
 ###Making Clusters
 ```{r}
-dF2 <- read.csv(file="leafletData500.csv") #data frame with 500 coordinates in it.
-
+#dF2 is a data frame with 500 coordinates
 cluster <- data.frame(lat= dF2$lat,
                  lng= dF2$lng)
 cluster%>%
@@ -180,7 +178,6 @@ leaflet(data = mapStates) %>% addTiles() %>%
   addPolygons(fillColor = topo.colors(10, alpha = NULL), stroke = FALSE)
 
 #CIRCLES
-cities <- read.csv("cities.csv")
 print(cities) # data set with cities, lng, lat, and population.
 
 leaflet(cities) %>% addTiles() %>%
