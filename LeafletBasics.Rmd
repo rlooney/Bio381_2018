@@ -17,11 +17,11 @@ output: html_document
 library(leaflet)
 library(ggplot2)
 library(maps)
+library(TeachingDemos)
+char2seed("Professor Looney")
 dF <- read.csv("leafletData30.csv")
 dF2<- read.csv("leafletData500.csv")
 cities<- read.csv("cities.csv")
-library(TeachingDemos)
-char2seed("Professor Looney")
 ```
 
 ###How to create a simple map of the earth & piping
@@ -31,11 +31,11 @@ char2seed("Professor Looney")
 # %>% takes the output my_map,and adds or "pipes" to the next command addTiles() as the first argument, and reassigns it to that variable
 my_map <- leaflet() %>%
   addTiles() 
+my_map
 
 #Without piping notation.
 my_map=leaflet()
 my_map= addTiles(my_map)
-
 my_map
 
 ```
@@ -76,10 +76,6 @@ map <- my_map %>%
              popup="Bio381 Classroom") # adds a pip up
 map
 
-  leaflet()%>%
-  addTiles()%>%
-  addCircleMarkers(lat=44.4764, lng=-73.1955,
-                   popup="Bio381 Classroom")
 
 ```
 
@@ -109,13 +105,6 @@ markers %>%
 
 ```
 
-###Adding Circle Markers 
-```{r}
-markers%>%
-  leaflet()%>%
-  addTiles()%>%
-  addCircleMarkers()
-```
 
 ### Adding Legends:
 #### A. rubrum= Red Maple
@@ -139,8 +128,15 @@ markers %>%
 ###Making Clusters
 ```{r}
 #dF2 is a data frame with 500 coordinates
+# say you want to work with A LOT of data.. just adding markers to the map isnt going to be very useful.
 cluster <- data.frame(lat= dF2$lat,
                  lng= dF2$lng)
+cluster%>%
+  leaflet()%>%
+  addTiles()%>%
+  addMarkers()
+
+# boom problem solved with clusters!
 cluster%>%
   leaflet()%>%
   addTiles()%>%
